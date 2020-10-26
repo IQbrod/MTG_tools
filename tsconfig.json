@@ -1,0 +1,17 @@
+{
+    "compilerOptions": {
+      "lib": [
+        "es2019",
+        "dom"
+      ],
+      "moduleResolution": "node",
+      "noUnusedLocals": true,
+      "noUnusedParameters": false,
+      "sourceMap": true,
+      "target": "es2019",
+      "outDir": "lib"
+    },
+    "exclude": [
+      "node_modules"
+    ]
+  }
