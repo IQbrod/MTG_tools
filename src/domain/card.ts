@@ -12,7 +12,7 @@ export class CardHelper {
         objs.forEach(obj => {
             let card: Card = new Card();
             card.name = obj?.name;
-            card.set_name = obj?.set_name;
+            card.set_name = jsonObject?.set_name;
             card.image_uri = obj?.image_uris?.png;
             result.push(card);
         });
