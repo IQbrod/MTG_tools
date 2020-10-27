@@ -22,4 +22,9 @@ export class SearchService {
             return cards;
         });
     }
+
+    async downloadPicture(pictureUrl: string, fileName: string): Promise<any> {
+        let path: string = __dirname + "/../data/" + fileName;
+        return restService.downlaodPicture(pictureUrl).pipe(fs.createWriteStream(path));
+    }
 }

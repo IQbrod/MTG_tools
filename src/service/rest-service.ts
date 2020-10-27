@@ -1,4 +1,5 @@
 const axios = require('axios');
+const request = require("request")
 
 export class RestService {
     private async getLatestBulkUrl(): Promise<string> {
@@ -7,5 +8,9 @@ export class RestService {
 
     async getLatestBulk(): Promise<any> {
         return (await axios.get(await this.getLatestBulkUrl())).data;
+    }
+
+    downlaodPicture(pictureUrl: string) {
+        return request(pictureUrl);
     }
 }
