@@ -1,7 +1,7 @@
 import { Card } from "../domain/card";
 import { SearchService } from "../service/search-service";
-import { download } from "./download";
 
+const constants = require("../constants");
 const fs = require("fs");
 const searchService : SearchService = new SearchService();
 
@@ -12,7 +12,7 @@ const groupBy = (data, key) => {
     }, {});
 };
 
-let cardsPromise: Promise<Card[]> = fs.existsSync(__dirname + "/../data/cards-latest.json") ? searchService.getLocalCards() : download();
+let cardsPromise: Promise<Card[]> = fs.existsSync(constants.local_cards_file) ? searchService.getLocalCards() : searchService.download();
 
 cardsPromise.then(cards => {
     let v = groupBy(cards, "set_name");
