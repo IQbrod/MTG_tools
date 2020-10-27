@@ -12,10 +12,11 @@
   },
   "repository": {
     "type": "git",
-    "url": "https://github.com/ashleygwilliams/my_package.git"
+    "url": "https://github.com/IQbrod/MTG_tools"
   },
   "scripts": {
-    "exec": "npx ts-node src/handler.ts"
+    "download": "npx ts-node src/handler/download.ts",
+    "generate": "npx ts-node src/handler/generate.ts"
   },
   "author": "IQbrod",
   "license": "MIT"

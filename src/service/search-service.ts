@@ -4,9 +4,13 @@ import { RestService } from "./rest-service";
 const restService: RestService = new RestService();
 
 export class SearchService {
-    async getCards(): Promise<Card[]> {
+    async getRemoteCards(): Promise<Card[]> {
         return (await restService.getLatestBulk())
             .map(obj => CardHelper.fromJson(obj)) // Card[][]
             .reduce((x,y) => x.concat(y), []); // Card[]
+    }
+
+    async getLocalCards(): Promise<Card[]> {
+        return undefined;
     }
 }
