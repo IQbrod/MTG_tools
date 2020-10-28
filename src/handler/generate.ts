@@ -16,12 +16,23 @@ let cardsPromise: Promise<Card[]> = fs.existsSync(constants.local_cards_file) ? 
 
 cardsPromise.then(cards => {
     let sets = groupBy(cards, "set_name");
-    for (const [set, _] of Object.entries(sets)) {
+    for (const [set, cards] of Object.entries(sets)) {
+        // Debug purpose
+        if (set == "Innistrad") {
         let folderName: string = constants.output_folder + set.replace(/\W/g, '').toLowerCase();
-        if (!fs.existsSync(folderName)) {
-            fs.mkdirSync(folderName);
+            if (!fs.existsSync(folderName)) {
+                fs.mkdirSync(folderName);
+            }
+            (cards as Card[]).forEach(card => {
+                let iter: number = 0;
+                let fileName: string = "/" + card.name.replace(/\W/g, '').toLowerCase();
+                /** Some cards are edited twice in a same set (eg: Lands),
+                 * We increment "iter" to get files like forest.png / forest_2.png / forest_3.png */
+                while (fs.existsSync(folderName + fileName + (iter ? "_" + iter+1 : "") + ".png")) {
+                    iter++;
+                }
+                searchService.downloadPicture(card.image_uri, folderName + fileName + (iter ? "_" + (iter+1) : "") + ".png");
+            });
         }
-        //console.log(cards[0].image_uri);
     }
-    //return searchService.downloadPicture(sets["Innistrad"][0].image_uri, "temp.png");
 });
